@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Age Calculator</title>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Age Calculator</h1>
+        <p>Enter your birthdate to calculate your exact age.</p>
+
+        <div class="calculator">
+            <label for="birthdate">Select Birthdate:</label>
+            <input type="date" id="birthdate" />
+
+            <button onclick="calculateAge()">Calculate Age</button>
+
+            <div id="result" class="result">
+                <p><strong>Age:</strong> <span id="age-years">--</span> years, <span id="age-months">--</span> months,
+                    and <span id="age-days">--</span> days.</p>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        /* Reset */
+        body,
+        h1,
+        p,
+        label,
+        input,
+        button,
+        div {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        /* Container */
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 90%;
+        }
+
+        /* Title */
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        /* Instructions */
+        p {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        /* Calculator */
+        .calculator label {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .calculator input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .calculator button {
+            background: #007bff;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .calculator button:hover {
+            background: #0056b3;
+        }
+
+        /* Result */
+        .result {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: #444;
+        }
+
+        .result p {
+            margin-top: 10px;
+        }
+    </style>
+
+    <script>
+        function calculateAge() {
+            const birthdateInput = document.getElementById('birthdate').value;
+
+            if (!birthdateInput) {
+                alert('Please select your birthdate.');
+                return;
+            }
+
+            const birthdate = new Date(birthdateInput);
+            const today = new Date();
+
+            // Calculate age in years, months, and days
+            let years = today.getFullYear() - birthdate.getFullYear();
+            let months = today.getMonth() - birthdate.getMonth();
+            let days = today.getDate() - birthdate.getDate();
+
+            if (days < 0) {
+                months -= 1;
+                days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+            }
+
+            if (months < 0) {
+                years -= 1;
+                months += 12;
+            }
+
+            // Display the result
+            document.getElementById('age-years').textContent = years;
+            document.getElementById('age-months').textContent = months;
+            document.getElementById('age-days').textContent = days;
+        }
+
+    </script>
+
+</body>
+
+</html>
